@@ -45,21 +45,19 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 
 	var_dump($responsejson['hits']);
 
-	$hits = isset($responsejson['hits']) ? $responsejson['hits'] : array();
+	$hits = isset($responsejson['hits']['hits']) ? $responsejson['hits']['hits'] : array();
 
 	$city = "";
 
 	foreach($hits as $hit){
-		$data = $hit[0];
-		$name = $data['_source']['name'];
-		$country = $data['_source']['country'];
-		$countrycode = $data['_source']['countrycode'];
+		$name = $hit['_source']['name'];
+		$country = $hit['_source']['country'];
+		$countrycode = $hit['_source']['countrycode'];
 
 		if(!in_array($name, $excludedList)) {
 			$city = $name . " + " . $country . " + " . $countrycode;
 			exit;
 		}
-
 	}
 
 	echo $city;
