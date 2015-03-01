@@ -8,7 +8,7 @@ $app->get('/hello/:name', function ($name) {
 $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded="") {
     echo "text is: ". $text;
 	echo "<br>";
-    echo "excluded is: ". $excluded;
+    $excludedList = explode(',', $excluded);
 
 	$data = array(
 		"query" => array(
@@ -44,6 +44,20 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 	$responsejson = json_decode($resp, true);
 
 	var_dump($responsejson['hits'],true);
+
+	$hits = isset($responsejson['hits']) ? $responsejson['hits'] : array();
+
+
+	foreach($hits as $dataHits){
+		$name = $dataHits['hits']['source']['name'];
+		$country = $dataHits['hits']['source']['country'];
+		$countrycode = $dataHits['hits']['source']['countrycode'];
+
+		$city = $name." + ".$country." + ".$countrycode;
+
+	}
+
+	echo $city;
 
 });
 $app->run();
