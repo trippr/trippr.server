@@ -47,12 +47,13 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 
 	$hits = isset($responsejson['hits']) ? $responsejson['hits'] : array();
 
-	$city = "";
 
-	foreach($hits as $dataHits){
-		$name = $dataHits['_source']['name'];
-		$country = $dataHits['_source']['country'];
-		$countrycode = $dataHits['_source']['countrycode'];
+
+	foreach($hits as $hit){
+		var_dump($hit,true);
+		$name = $hit['hits']['_source']['name'];
+		$country = $hit['hits']['_source']['country'];
+		$countrycode = $hit['hits']['_source']['countrycode'];
 
 		$city = $name." + ".$country." + ".$countrycode;
 
