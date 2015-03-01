@@ -47,7 +47,7 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 
 	$hits = isset($responsejson['hits']) ? $responsejson['hits'] : array();
 
-
+	$city = "";
 
 	foreach($hits as $hit){
 		$data = $hit[0];
@@ -57,7 +57,7 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 
 		if(!in_array($name, $excludedList)) {
 			$city = $name . " + " . $country . " + " . $countrycode;
-			break;
+			exit;
 		}
 
 	}
