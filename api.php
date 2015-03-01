@@ -40,5 +40,10 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 
 	echo "<br>";
 	var_dump($resp);
+
+	$responsejson = json_decode($resp, true);
+
+	var_dump($responsejson['hits'],true);
+
 });
 $app->run();
