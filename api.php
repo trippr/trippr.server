@@ -49,18 +49,17 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 
 	$city = "";
 
-	foreach($hits as $hit){
+	foreach($hits as $hit) {
 		$name = $hit['_source']['name'];
 		$country = $hit['_source']['country'];
 		$countrycode = $hit['_source']['countrycode'];
 
 		if(!in_array($name, $excludedList)) {
 			$city = $name . " + " . $country . " + " . $countrycode;
-			exit;
+			return $city;
 		}
 	}
 
-	echo $city;
-
+	return "notfound";
 });
 $app->run();
