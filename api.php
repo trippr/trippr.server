@@ -55,7 +55,10 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 		$country = $data['_source']['country'];
 		$countrycode = $data['_source']['countrycode'];
 
-		$city = $name." + ".$country." + ".$countrycode;
+		if(!in_array($name, $excludedList)) {
+			$city = $name . " + " . $country . " + " . $countrycode;
+			break;
+		}
 
 	}
 
