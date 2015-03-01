@@ -37,8 +37,6 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 	$resp = curl_exec($curl);
 	// Close request to clear up some resources
 	curl_close($curl);
-
-	echo "<br>";
 	//var_dump($resp);
 
 	$responsejson = json_decode($resp, true);
