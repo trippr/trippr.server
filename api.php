@@ -50,10 +50,10 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 
 
 	foreach($hits as $hit){
-		var_dump($hit,true);
-		$name = $hit['hits']['_source']['name'];
-		$country = $hit['hits']['_source']['country'];
-		$countrycode = $hit['hits']['_source']['countrycode'];
+		$data = $hit[0];
+		$name = $data['_source']['name'];
+		$country = $data['_source']['country'];
+		$countrycode = $data['_source']['countrycode'];
 
 		$city = $name." + ".$country." + ".$countrycode;
 
