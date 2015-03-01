@@ -59,6 +59,7 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 		}
 	}
 
+	echo "notfound";
 	return "notfound";
 });
 $app->run();
