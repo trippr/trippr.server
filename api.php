@@ -49,9 +49,9 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
 
 
 	foreach($hits as $dataHits){
-		$name = $dataHits['hits']['source']['name'];
-		$country = $dataHits['hits']['source']['country'];
-		$countrycode = $dataHits['hits']['source']['countrycode'];
+		$name = $dataHits['hits']['_source']['name'];
+		$country = $dataHits['hits']['_source']['country'];
+		$countrycode = $dataHits['hits']['_source']['countrycode'];
 
 		$city = $name." + ".$country." + ".$countrycode;
 
