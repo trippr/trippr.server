@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <script src="underscore.js"></script>
+                    <script src="sdk.min.js"></script>
+                            
+                            <script type="text/javascript">
+            var lib = new AcisionSDK("MYAPIKEY", {
+                                    onConnected: function() {
+                                                        console.log("Logged in!");
+                                                                            
+                                                                            lib.messaging.setCallbacks({
+                                                                                                        onMessage : function(msg) {
+                                                                                                                                    console.log("Received message from " + msg.from);
+                                                                                                                                                                console.log(msg.content);
+                                                                                                                                                                                        }
+                                                                                                                                                                                                            });
+                                                                                                
+                                                                                                lib.messaging.sendToDestination("username@sdk.acision.com", "Test message from javascript", {}, {
+                                                                                                                            onAcknowledged : function() {
+                                                                                                                                                        console.log("Application got acknowledgement of message being sent");
+                                                                                                                                                                                },
+                                                                                                                                                                                                        onError : function(code, message) {
+                                                                                                                                                                                                                                    console.log("Application failed to send message");
+                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                });
+                                                                                                                },
+                                                                                                                                onAuthFailure: function() {
+                                                                                                                                                                    console.warn("Invalid username or password!");
+                                                                                                                                                                                    }
+                                                            }, {
+                                                                                username: "username",
+                                                                                                            password: "username"
+                                                                                                                            });
+        </script>
+            </head>
+                <body>
+                    </body>
+                    </html>
