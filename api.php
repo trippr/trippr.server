@@ -2,6 +2,7 @@
 require 'vendor/autoload.php';
 
 $app = new \Slim\Slim();
+
 $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded="") {
     $excludedList = explode(',', $excluded);
     $data = array(
@@ -32,16 +33,18 @@ $app->get('/destinations/search/:text(/:excluded)', function($text, $excluded=""
         curl_close($curl);
 
         $responsejson = json_decode($resp, true);
-
         $hits = isset($responsejson['hits']['hits']) ? $responsejson['hits']['hits'] : array();
+        
+	$city = "";
 
-        $city = "";
-
-        foreach($hits as $hit) {
+        foreach ($hits as $hit) {
+		if (isset($hit['_source']) {
+			return "notfound";
+		}
                 $name = $hit['_source']['name'];
                 $country = $hit['_source']['country'];
                 $countrycode = $hit['_source']['countrycode'];
-                if(!in_array($name, $excludedList)) {
+                if (!in_array($name, $excludedList)) {
                         $city = $name . " + " . $country . " + " . $countrycode;
                         return $city;
                 }
